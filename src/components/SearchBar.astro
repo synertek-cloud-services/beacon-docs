@@ -1,0 +1,120 @@
+---
+interface Props {
+  variant?: 'hero' | 'sidebar';
+}
+const { variant = 'sidebar' } = Astro.props;
+---
+
+<div class={`search-wrap search-wrap--${variant}`} data-pagefind-ignore>
+  <div id={variant === 'hero' ? 'search-hero' : 'search-sidebar'}></div>
+</div>
+
+{variant === 'hero' && (
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script>
+    async function initHeroSearch() {
+      try {
+        // @ts-ignore
+        const { PagefindUI } = await import('/pagefind/pagefind-ui.js');
+        new PagefindUI({
+          element: '#search-hero',
+          showSubResults: true,
+          showImages: false,
+          placeholder: 'What can we help you find?',
+        });
+      } catch {
+        const el = document.getElementById('search-hero');
+        if (el) el.innerHTML = `<input class="search-placeholder" placeholder="What can we help you find?" disabled />`;
+      }
+    }
+    initHeroSearch();
+  </script>
+)}
+
+{variant === 'sidebar' && (
+  <script>
+    async function initSidebarSearch() {
+      try {
+        // @ts-ignore
+        const { PagefindUI } = await import('/pagefind/pagefind-ui.js');
+        new PagefindUI({
+          element: '#search-sidebar',
+          showSubResults: false,
+          showImages: false,
+          placeholder: 'Search docs…',
+        });
+      } catch {
+        const el = document.getElementById('search-sidebar');
+        if (el) el.innerHTML = `<input class="search-placeholder" placeholder="Search docs…" disabled />`;
+      }
+    }
+    initSidebarSearch();
+  </script>
+)}
+
+<style>
+  .search-wrap {
+    width: 100%;
+  }
+
+  .search-wrap--hero {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .search-wrap--sidebar {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  :global(.search-placeholder) {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-2);
+    border-radius: var(--r-btn);
+    color: var(--muted);
+    font-family: var(--font);
+    font-size: 13px;
+    outline: none;
+  }
+
+  /* Pagefind UI overrides */
+  :global(.pagefind-ui) {
+    --pagefind-ui-scale: 0.85;
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--text);
+    --pagefind-ui-background: var(--surface-2);
+    --pagefind-ui-border: var(--border-2);
+    --pagefind-ui-tag: var(--surface);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 5px;
+    --pagefind-ui-image-border-radius: 4px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: var(--font);
+  }
+
+  :global(.pagefind-ui__search-input) {
+    background: var(--surface-2) !important;
+    color: var(--text) !important;
+    border-color: var(--border-2) !important;
+  }
+
+  :global(.pagefind-ui__results-area) {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--r-card) !important;
+  }
+
+  :global(.pagefind-ui__result) {
+    border-top-color: var(--border) !important;
+  }
+
+  :global(.pagefind-ui__result-link) {
+    color: var(--accent) !important;
+  }
+
+  :global(.pagefind-ui__result-excerpt) {
+    color: var(--muted-2) !important;
+  }
+</style>

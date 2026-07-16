@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentId?: string;
+}
+
+const { title, description, currentId } = Astro.props;
+const allArticles = await getCollection('kb');
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="kb-shell">
+    <Sidebar articles={allArticles} currentId={currentId} />
+    <main class="kb-body">
+      <slot />
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .kb-shell {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .kb-body {
+    flex: 1;
+    min-width: 0;
+    padding: 40px 48px;
+  }
+
+  @media (max-width: 900px) {
+    .kb-shell { flex-direction: column; }
+    .kb-body { padding: 24px 20px; }
+  }
+</style>

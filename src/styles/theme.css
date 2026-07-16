@@ -1,0 +1,47 @@
+/* ============================================================
+   Beacon Docs — design tokens
+   Single source of truth for all colors, spacing, and type.
+   To repaint the site: edit only this file.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --bg:        #0c0e16;
+  --surface:   #141720;
+  --surface-2: #1c1f2e;
+  --border:    #232638;
+  --border-2:  #2d3148;
+
+  /* Text */
+  --text:      #d8daf0;
+  --muted:     #616480;
+  --muted-2:   #8486a8;
+
+  /* Accent / status */
+  --accent:         #4e7ef7;
+  --accent-hover:   #6b93f8;
+  --accent-subtle:  rgba(78, 126, 247, 0.10);
+  --accent-purple:  #863bff;
+  --teal:           #2dcfa0;
+  --amber:          #f0a840;
+  --red:            #e8566a;
+
+  /* Layout */
+  --sidebar-w:  260px;
+  --topbar-h:   52px;
+  --content-w:  760px;
+  --toc-w:      200px;
+
+  /* Shape */
+  --r-card: 8px;
+  --r-btn:  5px;
+  --r-sm:   4px;
+
+  /* Elevation */
+  --shadow: 0 2px 8px rgba(0, 0, 0, .4), 0 1px 2px rgba(0, 0, 0, .3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, .3);
+
+  /* Typography */
+  --font:  -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --mono:  'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+}

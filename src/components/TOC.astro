@@ -1,0 +1,91 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{toc.length >= 3 && (
+  <nav class="toc" aria-label="On this page">
+    <p class="toc-title">On this page</p>
+    <ul class="toc-list">
+      {toc.map(h => (
+        <li class={`toc-item toc-item--h${h.depth}`}>
+          <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .toc {
+    position: sticky;
+    top: 24px;
+    width: var(--toc-w);
+    flex-shrink: 0;
+    padding: 0 0 0 24px;
+    border-left: 1px solid var(--border);
+  }
+
+  .toc-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-item { margin: 0; }
+
+  .toc-item--h3 { padding-left: 12px; }
+
+  .toc-link {
+    display: block;
+    padding: 3px 0;
+    font-size: 12.5px;
+    color: var(--muted-2);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.1s;
+  }
+
+  .toc-link:hover { color: var(--text); }
+  .toc-link.active { color: var(--accent); }
+</style>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+
+  const observer = new IntersectionObserver(
+    entries => {
+      const visible = entries.filter(e => e.isIntersecting);
+      if (!visible.length) return;
+      const top = visible.reduce((a, b) =>
+        a.boundingClientRect.top <= b.boundingClientRect.top ? a : b
+      );
+      links.forEach(l => l.classList.remove('active'));
+      const id = top.target.id;
+      const active = document.querySelector<HTMLAnchorElement>(`.toc-link[href="#${id}"]`);
+      if (active) active.classList.add('active');
+    },
+    { rootMargin: '-16px 0px -70% 0px', threshold: 0 }
+  );
+
+  document.querySelectorAll('.prose h2, .prose h3').forEach(h => observer.observe(h));
+</script>

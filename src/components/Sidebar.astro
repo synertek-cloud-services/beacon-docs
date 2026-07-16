@@ -1,0 +1,186 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES } from '../data/categories';
+import SearchBar from './SearchBar.astro';
+
+interface Props {
+  articles: CollectionEntry<'kb'>[];
+  currentId?: string;
+}
+
+const { articles, currentId } = Astro.props;
+
+const grouped = CATEGORIES.map(cat => ({
+  ...cat,
+  articles: articles
+    .filter(a => a.data.category === cat.slug)
+    .sort((a, b) => a.data.order - b.data.order),
+})).filter(cat => cat.articles.length > 0);
+
+function isActive(articleId: string) {
+  return articleId === currentId;
+}
+
+function isCategoryActive(categorySlug: string) {
+  return articles.some(a => a.data.category === categorySlug && a.id === currentId);
+}
+---
+
+<nav class="sidebar" aria-label="Documentation navigation" data-pagefind-ignore>
+  <div class="sidebar-brand">
+    <a href="/" class="sidebar-brand-link">
+      <img src="/favicon.svg" alt="" class="sidebar-logo" width="22" height="22" />
+      <span class="sidebar-brand-name">Beacon <em>Docs</em></span>
+    </a>
+  </div>
+
+  <SearchBar variant="sidebar" />
+
+  <div class="sidebar-nav">
+    {grouped.map(cat => (
+      <details class="nav-category" open={isCategoryActive(cat.slug) || undefined}>
+        <summary class="nav-category-summary">
+          <span class="nav-cat-label">{cat.label}</span>
+          <svg class="nav-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </summary>
+        <ul class="nav-articles">
+          {cat.articles.map(article => (
+            <li>
+              <a
+                href={`/kb/${article.id.replace(/\.mdx?$/, '')}/`}
+                class={`nav-article${isActive(article.id) ? ' active' : ''}`}
+                aria-current={isActive(article.id) ? 'page' : undefined}
+              >
+                {article.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-w);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    flex-shrink: 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .sidebar-brand {
+    padding: 0 14px;
+    height: var(--topbar-h);
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .sidebar-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+  }
+
+  .sidebar-logo {
+    flex-shrink: 0;
+  }
+
+  .sidebar-brand-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .sidebar-brand-name em {
+    font-style: normal;
+    color: var(--muted-2);
+    font-weight: 400;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 8px 0 24px;
+    overflow-y: auto;
+  }
+
+  /* Category group */
+  .nav-category {
+    border: none;
+  }
+
+  .nav-category-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    margin-top: 8px;
+  }
+
+  .nav-category-summary::-webkit-details-marker { display: none; }
+  .nav-category-summary::marker { display: none; }
+
+  .nav-category-summary:hover { color: var(--text); }
+
+  .nav-chevron {
+    flex-shrink: 0;
+    transition: transform 0.18s ease;
+    color: var(--muted);
+  }
+
+  .nav-category[open] .nav-chevron {
+    transform: rotate(90deg);
+  }
+
+  .nav-articles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-article {
+    display: block;
+    padding: 5px 14px 5px 26px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--muted-2);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: color 0.1s, background-color 0.1s, border-color 0.1s;
+  }
+
+  .nav-article:hover {
+    color: var(--text);
+    background: var(--surface-2);
+    text-decoration: none;
+  }
+
+  .nav-article.active {
+    color: var(--accent);
+    background: var(--accent-subtle);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+</style>

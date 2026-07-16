@@ -1,0 +1,224 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import SearchBar from '../components/SearchBar.astro';
+import { CATEGORIES } from '../data/categories';
+
+const allArticles = await getCollection('kb');
+
+const categoriesWithCounts = CATEGORIES.map(cat => ({
+  ...cat,
+  count: allArticles.filter(a => a.data.category === cat.slug).length,
+}));
+---
+
+<BaseLayout title="Beacon Docs" description="Documentation for the Beacon open-source RMM platform.">
+  <div class="page">
+    <header class="topbar" data-pagefind-ignore>
+      <div class="topbar-inner">
+        <a href="/" class="topbar-brand">
+          <img src="/favicon.svg" alt="" width="24" height="24" />
+          <span>Beacon <em>Docs</em></span>
+        </a>
+        <nav class="topbar-links">
+          <a href="https://github.com/synertek-cloud-services/beacon" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" data-pagefind-ignore>
+        <img src="/favicon.svg" alt="Beacon" class="hero-logo" width="56" height="56" />
+        <h1 class="hero-title">Beacon Documentation</h1>
+        <p class="hero-sub">Open-source RMM platform — agents, monitoring, remote access, and automation</p>
+        <div class="hero-search">
+          <SearchBar variant="hero" />
+        </div>
+      </section>
+
+      <section class="categories" data-pagefind-ignore>
+        <div class="categories-grid">
+          {categoriesWithCounts.map(cat => (
+            <CategoryCard category={cat} articleCount={cat.count} />
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-pagefind-ignore>
+      <div class="footer-inner">
+        <span class="footer-version">Beacon v0.2.8</span>
+        <span class="footer-sep">·</span>
+        <a href="https://github.com/synertek-cloud-services/beacon" target="_blank" rel="noopener noreferrer">Source</a>
+        <span class="footer-sep">·</span>
+        <a href="https://github.com/synertek-cloud-services/beacon/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+        <span class="footer-sep">·</span>
+        <a href="https://github.com/synertek-cloud-services/beacon/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">AGPL-3.0</a>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Topbar */
+  .topbar {
+    height: var(--topbar-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .topbar-brand em {
+    font-style: normal;
+    color: var(--muted-2);
+    font-weight: 400;
+  }
+
+  .topbar-brand:hover { text-decoration: none; }
+
+  .topbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .topbar-links a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted-2);
+    text-decoration: none;
+    transition: color 0.1s;
+  }
+
+  .topbar-links a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 64px 24px 48px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-logo {
+    margin: 0 auto 20px;
+    width: 56px;
+    height: auto;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted-2);
+    margin-bottom: 32px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-search {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* Category grid */
+  .categories {
+    flex: 1;
+    padding: 40px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 960px) {
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .categories-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 20px 32px; }
+    .categories { padding: 24px 16px; }
+  }
+
+  /* Footer */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 16px 32px;
+    background: var(--surface);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .footer-inner a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .footer-inner a:hover { color: var(--accent); }
+
+  .footer-version {
+    font-weight: 600;
+    color: var(--muted-2);
+  }
+
+  .footer-sep { color: var(--border-2); }
+</style>
