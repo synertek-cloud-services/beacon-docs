@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found — Beacon Docs">
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="/" class="topbar-brand">
+          <img src="/favicon.svg" alt="" width="24" height="24" />
+          <span>Beacon <em>Docs</em></span>
+        </a>
+      </div>
+    </header>
+
+    <main class="content">
+      <h1>404</h1>
+      <p>Page not found.</p>
+      <a href="/" class="home-link">Back to Docs home</a>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .topbar {
+    height: var(--topbar-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .topbar-brand em {
+    font-style: normal;
+    color: var(--muted-2);
+    font-weight: 400;
+  }
+
+  .topbar-brand:hover { text-decoration: none; }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--border-2);
+    line-height: 1;
+    margin: 0;
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--muted-2);
+    margin: 0;
+  }
+
+  .home-link {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 20px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--r-btn);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.15s;
+  }
+
+  .home-link:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+</style>

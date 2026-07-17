@@ -7,10 +7,15 @@ import { CATEGORIES } from '../data/categories';
 
 const allArticles = await getCollection('kb');
 
-const categoriesWithCounts = CATEGORIES.map(cat => ({
-  ...cat,
-  count: allArticles.filter(a => a.data.category === cat.slug).length,
-}));
+const categoriesWithCounts = CATEGORIES.map(cat => {
+  const catArticles = allArticles
+    .filter(a => a.data.category === cat.slug)
+    .sort((a, b) => a.data.order - b.data.order);
+  const firstHref = catArticles.length > 0
+    ? `/kb/${catArticles[0].id.replace(/\.mdx?$/, '')}/`
+    : null;
+  return { ...cat, count: catArticles.length, firstHref };
+});
 ---
 
 <BaseLayout title="Beacon Docs" description="Documentation for the Beacon open-source RMM platform.">
@@ -43,7 +48,7 @@ const categoriesWithCounts = CATEGORIES.map(cat => ({
       <section class="categories" data-pagefind-ignore>
         <div class="categories-grid">
           {categoriesWithCounts.map(cat => (
-            <CategoryCard category={cat} articleCount={cat.count} />
+            <CategoryCard category={cat} articleCount={cat.count} href={cat.firstHref} />
           ))}
         </div>
       </section>

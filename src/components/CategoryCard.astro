@@ -4,10 +4,10 @@ import type { Category } from '../data/categories';
 interface Props {
   category: Category;
   articleCount: number;
+  href?: string | null;
 }
 
-const { category, articleCount } = Astro.props;
-const href = `/kb/${category.slug}/`;
+const { category, articleCount, href } = Astro.props;
 ---
 
 <a href={href} class="category-card">
