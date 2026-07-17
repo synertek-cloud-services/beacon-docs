@@ -1,2 +1,3 @@
 name = "beacon-docs"
+account_id = "8fefd04d62780c1624579795cb08f891"
 pages_build_output_dir = "dist"

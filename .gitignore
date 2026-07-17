@@ -8,3 +8,4 @@ node_modules/
 
 # Pagefind output (generated at build time)
 public/pagefind/
+.envrc

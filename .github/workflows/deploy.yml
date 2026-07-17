@@ -31,5 +31,4 @@ jobs:
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: 2144e074fdf03e2888d83e6815af8b96
           command: pages deploy dist --project-name=beacon-docs --branch=${{ github.ref_name }} --commit-message="${{ github.event.head_commit.message }}"
