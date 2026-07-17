@@ -56,14 +56,24 @@ wrangler deploy
 
 The Worker is now live at `https://beacon-worker.<your-account>.workers.dev` (or your custom domain if configured).
 
-## Step 5 — Build and run the dashboard
+## Step 5 — Deploy the dashboard
+
+The dashboard is a static Vite app. Build it and serve it from any static host (Cloudflare Pages, nginx, etc.).
 
 ```bash
 cd ../dashboard
-pnpm dev
+pnpm build
+# Output is in dashboard/dist/
 ```
 
-Open `http://localhost:5173`. On first load you'll be prompted to enter your Worker URL and create an admin account.
+**Cloudflare Pages (recommended):**
+```bash
+wrangler pages deploy dist --project-name=beacon-dashboard
+```
+
+Set the `VITE_WORKER_URL` environment variable in your Pages project to your Worker URL before building, or enter the Worker URL on the dashboard's first-run setup screen.
+
+On first load you'll be prompted to enter your Worker URL and create an admin account.
 
 ## Step 6 — Enroll your first device
 
