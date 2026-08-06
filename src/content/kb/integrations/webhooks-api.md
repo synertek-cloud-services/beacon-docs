@@ -1,119 +1,23 @@
 ---
-title: Webhooks & API
+title: Webhooks and Integration Boundaries
 category: integrations
 order: 1
-updated: 2026-07-16
-tags: [api, webhooks, integration, automation, rest]
+updated: 2026-08-05
+tags: [webhooks, email, integrations]
 ---
 
-Beacon exposes a REST API for all operations available in the dashboard. Webhooks allow external systems to receive push notifications when alert states change, devices check in, or jobs complete.
+Beacon can deliver alert notifications through configured email and webhook endpoints. These settings are administrator-managed and notification delivery is experimental in the beta. Configure only endpoints your organization controls and review their logs when testing delivery.
 
-## Authentication
+## Configure webhooks
 
-All API requests require a Bearer token:
+From **Settings**, add a webhook endpoint with its HTTPS URL and enabled state. Then enable **Webhook notification** on each monitor that should emit an alert notification. Notification is an explicit per-monitor choice; merely creating an endpoint does not subscribe every alert.
 
-```http
-Authorization: Bearer <your-api-token>
-```
+Webhook consumers should accept duplicate delivery safely, validate their own expected payload shape, use a short response time, and avoid storing raw device/customer data unnecessarily. A webhook is a notification mechanism—not an authenticated public API for controlling Beacon.
 
-Generate API tokens at **Dashboard → Settings → API Tokens**. Tokens inherit the role and company scope of the user that creates them. Service account tokens with restricted scopes can be created by Administrators.
+## Configure email
 
-## Base URL
+Configure one supported email provider under **Settings**, then add the standalone notification addresses that should receive alerts. Enable **Email notification** on the relevant monitor. Provider behavior, delivery, and failure visibility remain environment-dependent during beta; test with a non-critical monitor before relying on it for escalation.
 
-```
-https://<your-worker-domain>/v1
-```
+## API availability
 
-## Devices
-
-```http
-GET  /v1/devices           # List all devices (paginated)
-GET  /v1/devices/:id       # Get device details and current metrics
-POST /v1/devices/:id/archive  # Archive a device
-```
-
-## Jobs
-
-```http
-GET  /v1/jobs              # List jobs
-POST /v1/jobs              # Create a job
-GET  /v1/jobs/:id          # Get job details and command results
-```
-
-**Create job payload:**
-
-```json
-{
-  "name": "Flush DNS",
-  "type": "quick",
-  "target": { "type": "all" },
-  "components": [
-    {
-      "component_id": "comp_abc123",
-      "variables": { "VAR_NAME": "value" }
-    }
-  ]
-}
-```
-
-## Alerts
-
-```http
-GET  /v1/alerts            # List alerts (filter: ?status=active&priority=high)
-GET  /v1/alerts/:id        # Get alert details
-POST /v1/alerts/:id/acknowledge  # Acknowledge an alert
-POST /v1/alerts/:id/resolve      # Manually resolve an alert
-```
-
-## Webhooks
-
-Outgoing webhooks are configured at **Dashboard → Settings → Notification Channels → New Channel → Webhook**. Beacon sends a POST to your endpoint on alert state changes.
-
-### Webhook payload
-
-```json
-{
-  "event": "alert.created",
-  "alert": {
-    "id": "alrt_abc123",
-    "priority": "high",
-    "status": "active",
-    "check_type": "disk_space",
-    "message": "Drive C: has 7.2 GB free (below 10 GB threshold)",
-    "triggered_at": "2026-07-16T14:23:00Z",
-    "device": {
-      "id": "dev_xyz789",
-      "name": "DESKTOP-ABC01",
-      "company": "Acme Corp",
-      "site": "Main Office"
-    }
-  }
-}
-```
-
-### Webhook events
-
-| Event | Fires when |
-|---|---|
-| `alert.created` | A new alert is raised |
-| `alert.acknowledged` | A technician acknowledges the alert |
-| `alert.resolved` | Alert is resolved (auto or manual) |
-| `device.online` | Device checks in after being offline |
-| `device.offline` | Device triggers an offline alert |
-| `job.completed` | A job finishes (all commands done) |
-
-### Webhook security
-
-Beacon signs each webhook POST with an HMAC-SHA256 signature in the `X-Beacon-Signature` header. Verify it:
-
-```python
-import hmac, hashlib
-
-def verify_signature(payload: bytes, signature: str, secret: str) -> bool:
-    expected = hmac.new(secret.encode(), payload, hashlib.sha256).hexdigest()
-    return hmac.compare_digest(f"sha256={expected}", signature)
-```
-
-Configure your webhook secret at **Settings → Notification Channels → [channel] → Signing Secret**.
-
-See also: [Notification Channels](/kb/alerting-policies/notification-channels/), [Autotask PSA](/kb/integrations/autotask-psa/)
+Beacon’s dashboard uses its Worker API internally, but this beta does not document or support a general external REST API, personal API tokens, service accounts, or a stable API compatibility contract. Do not build production automation against dashboard endpoints. Use the webhook notification surface, or an independently operated integration boundary, until a public API is released.

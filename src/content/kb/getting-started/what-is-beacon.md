@@ -2,36 +2,30 @@
 title: What is Beacon?
 category: getting-started
 order: 1
-updated: 2026-07-16
-tags: [overview, introduction, open-source]
+updated: 2026-08-05
+tags: [overview, beta, open-source]
 ---
 
-Beacon is an open-source Remote Monitoring and Management (RMM) platform built for managed service providers and IT administrators who want full control over their infrastructure. Unlike commercial RMM tools, Beacon is self-hosted, transparent, and auditable — you own your data, your stack, and your deployment.
+Beacon is an AGPL-3.0, self-hosted Remote Monitoring and Management (RMM) platform. It is built for teams that want to operate their own control plane without a per-endpoint license fee.
 
-## Core components
+Beacon is a **technical beta**. Windows and Linux are the current practical deployment targets; macOS code exists but is unvalidated and is not a supported beta deployment path. Treat the [beta support matrix](https://github.com/synertek-cloud-services/beacon/blob/main/docs/BETA_PLATFORM_SUPPORT.md) as the product contract before enrolling a fleet.
 
-Beacon consists of three parts that work together:
+## What Beacon provides
 
-- **Beacon Agent** — a lightweight Go binary installed on each managed endpoint. Checks in every 60 seconds, reports device health metrics, and accepts commands dispatched from the control plane.
-- **Beacon Worker** — a Cloudflare Worker (built with Hono) backed by a D1 (SQLite) database. Handles agent enrollments, check-ins, command dispatch, alerting logic, and the REST API. Deployed to Cloudflare's global edge network.
-- **Beacon Dashboard** — a Vue 3 single-page application that administrators use to monitor devices, manage companies, run jobs, and configure policies.
+- An outbound-only endpoint agent for enrollment, check-ins, inventory, command execution, and remote sessions.
+- Companies, contacts, locations, Device Groups, and device custom fields for organizing a multi-company environment.
+- Policy monitors for disk, CPU, memory, offline state, antivirus, file size, ping, process, Windows service, and software changes.
+- Alerting with in-dashboard state, monitor-level notification controls, email providers, and webhooks.
+- Reusable Components, Quick Jobs, scheduled one-time jobs, variables and secrets, and command history.
+- Remote Shell through an outbound relay; Windows patch scanning, approval, policy scheduling, and reboot handling.
+- Local users, Microsoft Entra ID SSO, `readonly` / `technician` / `admin` roles, activity logging, branding, and dashboards.
 
-All agent-to-Worker communication is outbound HTTPS — managed endpoints require no inbound firewall rules.
+## Important beta boundaries
 
-## What Beacon does
-
-- **Device monitoring** — track online/offline status, disk space, CPU, memory, antivirus health, and more via policy-based monitors
-- **Remote access** — browser-based remote shell, RustDesk graphical remote desktop, and native RDP tunneling — all through a Cloudflare Durable Object relay
-- **Script execution** — run one-off or scheduled scripts (Jobs) across any set of devices using reusable Components from your library
-- **Multi-tenant** — manage multiple client organizations (Companies) from a single Beacon instance, with per-tenant isolation and enrollment tokens
-- **Alerting** — configurable alert priorities, notification channels, and auto-resolve rules
-
-## What Beacon is not (yet)
-
-Beacon is actively developed and intentionally focused. Features in planning or early development include: patch management, asset/inventory reporting, billing integration, and a mobile dashboard. See the [GitHub repository](https://github.com/synertek-cloud-services/beacon) for the current roadmap.
+Beacon does not claim equal capability on every platform. Linux Remote Shell is supported, while Windows Remote Shell is unvalidated. Windows patch management is Windows-only. Several monitor and notification workflows are experimental. macOS is broadly unvalidated. There is no RustDesk integration or native RDP tunneling in this beta.
 
 ## Next steps
 
-- [Architecture Overview](/kb/getting-started/architecture-overview/) — how the three components fit together
-- [Quick Start](/kb/getting-started/quick-start/) — get Beacon running in under 30 minutes
-- [Installing the Beacon Agent](/kb/installation/agent-installation/) — deploy your first managed endpoint
+- [Architecture overview](/kb/getting-started/architecture-overview/)
+- [Self-host a Beacon instance](/kb/getting-started/quick-start/)
+- [Install the agent](/kb/installation/agent-installation/)

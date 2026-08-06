@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="138 23 240 418" fill="none" role="img" aria-label="Beacon flame mark">
+  <defs>
+    <linearGradient id="flameGradient" x1="150" y1="390" x2="365" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+    <linearGradient id="flameGradientReverse" x1="370" y1="390" x2="165" y2="120" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+    <linearGradient id="bowlGradient" x1="168" y1="408" x2="344" y2="408" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+  </defs>
+  <path d="M158 200 235 297 246 365H203L174 326Z" fill="url(#flameGradient)"/>
+  <path d="m290 43-79 114 27 132 14 70h12l43-154-27-47Z" fill="url(#flameGradient)"/>
+  <path d="m356 208-91 92-9 65h53l33-38Z" fill="url(#flameGradientReverse)"/>
+  <path d="M166 365h180l-45 56h-90Z" fill="url(#bowlGradient)"/>
+</svg>

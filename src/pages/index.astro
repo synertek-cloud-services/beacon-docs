@@ -23,7 +23,7 @@ const categoriesWithCounts = CATEGORIES.map(cat => {
     <header class="topbar" data-pagefind-ignore>
       <div class="topbar-inner">
         <a href="/" class="topbar-brand">
-          <img src="/favicon.svg" alt="" width="24" height="24" />
+          <img src="/brand-mark.svg" alt="" width="24" height="24" />
           <span>Beacon <em>Docs</em></span>
         </a>
         <nav class="topbar-links">
@@ -37,9 +37,10 @@ const categoriesWithCounts = CATEGORIES.map(cat => {
 
     <main>
       <section class="hero" data-pagefind-ignore>
-        <img src="/favicon.svg" alt="Beacon" class="hero-logo" width="56" height="56" />
+        <img src="/brand-mark.svg" alt="Beacon" class="hero-logo" width="56" height="56" />
         <h1 class="hero-title">Beacon Documentation</h1>
-        <p class="hero-sub">Open-source RMM platform — agents, monitoring, remote access, and automation</p>
+        <p class="hero-sub">Self-hosted RMM for endpoint monitoring, automation, remote shell, and Windows patch management.</p>
+        <p class="beta-note"><strong>Technical beta:</strong> Windows and Linux have different support levels. Review the support matrix before production rollout.</p>
         <div class="hero-search">
           <SearchBar variant="hero" />
         </div>
@@ -56,7 +57,7 @@ const categoriesWithCounts = CATEGORIES.map(cat => {
 
     <footer class="site-footer" data-pagefind-ignore>
       <div class="footer-inner">
-        <span class="footer-version">Beacon v0.2.8</span>
+        <span class="footer-version">Beacon v0.2.9 beta</span>
         <span class="footer-sep">·</span>
         <a href="https://github.com/synertek-cloud-services/beacon" target="_blank" rel="noopener noreferrer">Source</a>
         <span class="footer-sep">·</span>
@@ -164,6 +165,17 @@ const categoriesWithCounts = CATEGORIES.map(cat => {
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .beta-note {
+    max-width: 560px;
+    margin: -14px auto 28px;
+    padding: 9px 12px;
+    color: var(--muted-2);
+    border: 1px solid var(--border-2);
+    border-radius: var(--r-sm);
+    font-size: 12.5px;
+    text-align: left;
   }
 
   .hero-search {

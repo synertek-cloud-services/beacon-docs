@@ -2,7 +2,7 @@
 title: Alert Rules
 category: alerting-policies
 order: 1
-updated: 2026-07-16
+updated: 2026-08-05
 tags: [alerting, policies, monitors, rules, thresholds]
 ---
 

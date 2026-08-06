@@ -2,7 +2,7 @@
 title: Glossary
 category: resources
 order: 1
-updated: 2026-07-16
+updated: 2026-08-05
 tags: [glossary, reference, terminology]
 ---
 
@@ -26,7 +26,7 @@ The specific metric or condition a monitor evaluates. Beacon supports 10 check t
 
 ## Company
 
-A top-level tenant in Beacon representing a managed organization or client. Each company has its own enrollment tokens, devices, alerts, and policy scope. See [Tenant & Site Setup](/kb/administration/tenant-site-setup/).
+A top-level organization in Beacon. A Company owns its enrollment tokens, devices, contacts, locations, variables, and defaults. See [Companies, Locations, and Device Groups](/kb/administration/tenant-site-setup/).
 
 ## Component
 
@@ -38,7 +38,7 @@ The built-in read-only component library that ships with Beacon. ComStore compon
 
 ## Credential directory
 
-The platform-specific directory where the agent stores its per-device credential file and agent log. Location: `%PROGRAMDATA%\Beacon\` (Windows) or `/etc/beacon/` (Linux/macOS).
+The platform-specific directory where the agent stores its per-device credential file and agent log. Location: `%PROGRAMDATA%\Beacon\` (Windows), `/etc/beacon/` (Linux), or `/Library/Application Support/Beacon/` (macOS, unvalidated).
 
 ## Durable Object
 
@@ -50,7 +50,7 @@ The process by which a new agent registers with the Beacon Worker and receives i
 
 ## Enrollment token
 
-A per-tenant credential that authorizes a new agent to enroll under a specific company. Generated from Dashboard → Companies → [company] → Enrollment Token.
+A Company-specific credential that authorizes a new agent to enroll. The raw value is displayed only when it is created; Beacon stores its hash. Create a dedicated deployment token and revoke it after use.
 
 ## Job
 
@@ -72,9 +72,9 @@ A pattern match rule on a component's stdout/stderr output that marks a command 
 
 The Cloudflare Durable Object responsible for bridging remote access sessions. Both the agent (endpoint side) and the technician (dashboard/client side) connect outbound to the relay, which forwards bytes between them.
 
-## Site
+## Device Group
 
-A sub-grouping within a Company (e.g. a physical location or network segment). Optional; devices not assigned to a site are in the company's ungrouped pool. See [Tenant & Site Setup](/kb/administration/tenant-site-setup/).
+A static, global, manually curated collection of devices. Device Groups are not dynamic filters. Policies can mix a Device Group with Company and individual-device targets; job targeting has more restrictive single-kind behavior.
 
 ## Sustained minutes
 

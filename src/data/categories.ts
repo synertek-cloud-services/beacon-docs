@@ -17,14 +17,14 @@ export const CATEGORIES: Category[] = [
   {
     slug: 'installation',
     label: 'Installation & Deployment',
-    description: 'Install the agent on Windows, Linux, and macOS. Bulk deployment and re-enrollment.',
+    description: 'Install the supported Windows and Linux agent, deploy at scale, and remove it cleanly.',
     order: 2,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
   },
   {
     slug: 'administration',
     label: 'Administration',
-    description: 'Manage tenants, configure user roles, and control agent update behavior.',
+    description: 'Manage companies, users, authentication, branding, and signed agent updates.',
     order: 3,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>`,
   },
@@ -38,7 +38,7 @@ export const CATEGORIES: Category[] = [
   {
     slug: 'remote-access',
     label: 'Remote Access',
-    description: 'Browser shell, RustDesk remote desktop, and native RDP tunneling — all without inbound firewall rules.',
+    description: 'Use Beacon Remote Shell through the outbound agent relay, with beta support boundaries.',
     order: 5,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
   },
@@ -52,7 +52,7 @@ export const CATEGORIES: Category[] = [
   {
     slug: 'integrations',
     label: 'Integrations',
-    description: 'Connect Beacon to external tools via webhooks and the REST API.',
+    description: 'Configure email and webhooks, and understand the currently supported integration surface.',
     order: 7,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
   },
