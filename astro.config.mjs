@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://beacon.synertekcs.com',
+  site: 'https://docs.runbeacon.net',
   output: 'static',
   integrations: [
     mdx(),
