@@ -2,7 +2,7 @@
 title: Users, Roles, and Authentication
 category: administration
 order: 2
-updated: 2026-08-05
+updated: 2026-08-27
 tags: [users, rbac, sso]
 ---
 
@@ -14,7 +14,7 @@ Beacon has three global roles. Enforcement happens in the Worker API, not just i
 | `technician` | Perform day-to-day operational actions such as running permitted jobs and handling devices/alerts. |
 | `admin` | Manage users, global configuration, policies, components, security-sensitive settings, and all administration. |
 
-Create local users under **Settings → Users**. An admin can configure Microsoft Entra ID SSO under **Settings → SSO**; its client secret is encrypted with `CONFIG_ENCRYPTION_KEY` and becomes unreadable if that key is lost or replaced.
+Create local users under **Settings → Users**. An admin can also configure Microsoft Entra ID SSO under **Settings → SSO**, assigning roles from Entra group membership instead of setting them per user — see [Single Sign-On with Microsoft Entra ID](/kb/administration/sso-entra-id/) for the full setup. Its client secret is encrypted with `CONFIG_ENCRYPTION_KEY` and becomes unreadable if that key is lost or replaced.
 
 ## Emergency access
 

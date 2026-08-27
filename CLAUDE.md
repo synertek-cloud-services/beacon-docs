@@ -143,4 +143,4 @@ pages_build_output_dir = "dist"
 
 ## Content status
 
-31 articles across all 9 categories, all with full content — no stub placeholders remain. `remote-access` (7 articles) and `using-beacon`/`administration` were most recently expanded to cover Web Remote (consent, Elevate, multi-monitor/session targeting, file transfer/clipboard), Software Management, Reports, Network Discovery, and Patch Management, none of which existed in the docs before 2026-08-26.
+32 articles across all 9 categories, all with full content — no stub placeholders remain. `remote-access` (7 articles) and `using-beacon`/`administration` were most recently expanded to cover Web Remote (consent, Elevate, multi-monitor/session targeting, file transfer/clipboard), Software Management, Reports, Network Discovery, Patch Management, and Entra ID SSO setup, none of which existed in the docs before 2026-08-26.
