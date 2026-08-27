@@ -32,7 +32,7 @@ The dashboard flags **Reboot Required** at the fleet level (a dashboard widget) 
 - **Auto Reboot** — off by default. When enabled, a device that reports a pending reboot after this policy's install skips the interactive prompt and reboots immediately instead of waiting on the user.
 - **Include Drivers** — driver updates can be made visible and manually approved through the same pipeline, but are never eligible for auto-approval under any classification setting — a bad driver can break a machine in a way software usually can't.
 - **Target Class** — a Server / Client OS pill, since server hosts need materially different handling (see below).
-- **Targeting** — Companies, Devices, and Device Groups, combined the same OR-list way as [Policy targeting](/kb/administration/tenant-site-setup/) elsewhere in Beacon.
+- **Targeting** — Companies, Devices, and Device Groups, combined the same way as [policy targeting](/kb/administration/tenant-site-setup/) elsewhere in Beacon: a device is covered if it matches any one of them.
 
 A recurring install window won't re-fire mid-occurrence — once it's dispatched for a given window, it waits for the next one.
 

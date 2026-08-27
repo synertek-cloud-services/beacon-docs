@@ -23,7 +23,7 @@ Use **Device Groups** for manually curated, global collections of endpoints. The
 
 ## Targeting policy versus jobs
 
-Policies may combine Companies, individual devices, and Device Groups; these target kinds are ORed, while OS and device-class filters remain additional AND conditions. A policy with no targets is unrestricted.
+Policies may combine Companies, individual devices, and Device Groups — a device qualifies if it matches *any one* of those, not all of them. OS and device-class filters are separate, additional restrictions on top: a device also has to satisfy those before the policy applies to it. A policy with no targets at all is unrestricted — it applies fleet-wide.
 
 Jobs target one kind at a time: a Company/location-style scope, selected devices, or a Device Group according to the dashboard form. Scheduled job targets are resolved at dispatch time, and overlapping group membership is deduplicated.
 
