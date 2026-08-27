@@ -38,7 +38,7 @@ export const CATEGORIES: Category[] = [
   {
     slug: 'remote-access',
     label: 'Remote Access',
-    description: 'Use Beacon Remote Shell through the outbound agent relay, with beta support boundaries.',
+    description: 'Remote Shell and Web Remote graphical control, both through the outbound agent relay, with beta support boundaries.',
     order: 5,
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
   },

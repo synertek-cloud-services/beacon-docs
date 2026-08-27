@@ -2,7 +2,7 @@
 title: Companies, Locations, and Device Groups
 category: administration
 order: 1
-updated: 2026-08-05
+updated: 2026-08-26
 tags: [companies, locations, device-groups]
 ---
 
@@ -10,7 +10,14 @@ Companies are Beacon’s top-level organizational boundary. Create a Company bef
 
 ## Set up a Company
 
-From **Companies**, create the Company, add contacts and locations as needed, select the enrollment/approval behavior, and create a single-purpose enrollment token. Copy a raw token when it is shown—Beacon stores only its hash and cannot reveal it later.
+From **Companies**, create the Company, then click into it to reach its detail page. Add contacts and locations as needed, select the enrollment/approval behavior, and create a single-purpose enrollment token. Copy a raw token when it is shown—Beacon stores only its hash and cannot reveal it later.
+
+## Company detail page
+
+A Company's detail page organizes everything about it into tabs: **Contacts**, **Locations**, **Tokens**, **Variables**, and **Discovery**. Editing lives in the page's own topbar, separate from the create flow on the list page. A "View Devices" button jumps straight to that company's filtered device list.
+
+- **Variables** holds per-company key/value configuration, referenceable from Component scripts as `CV_<KEY>` — see [Scripting and Components](/kb/using-beacon/scripting/). A variable can be marked secret, in which case its value is write-only: Beacon reports whether it's set but never displays it again once saved.
+- **Discovery** configures unmanaged-network host scanning for this company — see [Network Discovery](/kb/administration/network-discovery/).
 
 Use **Device Groups** for manually curated, global collections of endpoints. They are not dynamic filters and are distinct from Company locations. A Device Group can be used alongside individual devices and Companies when targeting policies; job targets are deliberately single-kind exclusive.
 
