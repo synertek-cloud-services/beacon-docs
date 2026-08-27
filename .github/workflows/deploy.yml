@@ -28,8 +28,12 @@ jobs:
 
       - run: pnpm run build
 
+      - name: Get commit message subject
+        id: commit
+        run: echo "subject=$(git log -1 --pretty=%s)" >> "$GITHUB_OUTPUT"
+
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 8fefd04d62780c1624579795cb08f891
-          command: pages deploy dist --project-name=beacon-docs --branch=${{ github.ref_name }} --commit-message="${{ github.event.head_commit.message }}"
+          command: pages deploy dist --project-name=beacon-docs --branch=${{ github.ref_name }} --commit-message="${{ steps.commit.outputs.subject }}"
