@@ -27,6 +27,6 @@ Start with the affected endpoint’s agent log and the dashboard’s command his
 
 **Remote Shell stays connecting:** allow the next check-in; then inspect the agent log for session attachment and collect sanitized browser network information. Linux is the supported beta Remote Shell platform; Windows is unvalidated.
 
-**Patch work is failing:** patch management is Windows-only. A Windows Update scan can legitimately take 10–90 seconds or longer; an install has a 15-minute timeout and known download/install edge cases. Check whether matching was based on update classification, not severity.
+**Patch work is failing:** patch management is Windows-only. A Windows Update scan can legitimately take 10–90 seconds or longer; an install has a 15-minute timeout and known download/install edge cases. Check whether matching was based on update classification, not severity. See [Patch Management](/kb/using-beacon/patch-management/) for the full approval/install pipeline.
 
 For full symptom guidance and what to include in a report, see [Beta support and diagnostics](https://github.com/synertek-cloud-services/beacon/blob/main/docs/BETA_SUPPORT.md).

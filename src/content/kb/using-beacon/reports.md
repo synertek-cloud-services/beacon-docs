@@ -13,7 +13,7 @@ tags: [reports, csv, export]
 Open **Reports** from the main navigation. Each report type has its own **Download CSV** button and shares a single company filter above them — narrow to one company or leave it unfiltered for the whole fleet. There's no in-dashboard preview; the file downloads directly.
 
 - **Device Inventory** — one row per device: identification, OS, class, and status fields.
-- **Patch Compliance** — Windows Update state per device, useful for showing a client (or an auditor) what's approved, installed, and outstanding.
+- **Patch Compliance** — Windows Update state per device, useful for showing a client (or an auditor) what's approved, installed, and outstanding. See [Patch Management](/kb/using-beacon/patch-management/) for how approval and installation actually work.
 - **Alert History** — a record of alert activity over the current filter, useful for incident review or SLA reporting.
 
 Software Inventory was considered for a fourth report type and deferred — it's the largest and sparsest of the candidates, with real per-device row-count concerns at scale.
