@@ -16,13 +16,11 @@ Elevate opens as a new, independent session in the background and only swaps in 
 
 ## What you get
 
-Once elevated, a second window is already open and waiting: a full elevated PowerShell session with a quick-launch menu of common administrative destinations — Task Manager, Control Panel, Services, Device Manager, Event Viewer, Disk Management, Programs and Features, Network Connections, System Properties, and File Explorer. Pick a number to launch one, or re-open the menu at any time.
-
-You can also now see and click any UAC secure-desktop prompt that appears in the session — including one triggered by something you do inside the elevated window itself.
+Elevate doesn't open any separate window or tool menu — you keep looking at the same desktop you were already on, now with SYSTEM-level access to it. The concrete difference is that you can see and click a UAC secure-desktop prompt: administer normally through the OS's own UI (right-click the Start button or taskbar for Task Manager/Device Manager/Disk Management/etc., as you would sitting at the machine), and when something you do triggers a UAC prompt, it's now visible and clickable instead of freezing the session.
 
 ## What Elevate can't do
 
-If the person actually sitting at the machine independently triggers their own UAC prompt (outside anything you started), that prompt still can't be seen or clicked from Web Remote — secure-desktop visibility only exists for the elevated session itself. The same is true if you manually right-click "Run as Administrator" on something outside the provided elevated window.
+If the person actually sitting at the machine independently triggers their own UAC prompt — something you didn't initiate — it still can't reliably be seen or clicked from Web Remote. This is a UI-level caution rather than something enforced in the product: the secure-desktop-following capture exists for the elevated session, but it's built around actions the technician takes, not ones the end user takes on their own.
 
 ## Beta support
 
