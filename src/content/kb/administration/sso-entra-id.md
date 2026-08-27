@@ -10,9 +10,19 @@ Beacon can authenticate dashboard users against Microsoft Entra ID instead of (o
 
 ## 1. Register an application in Entra ID
 
-In the Entra admin center, register a new application and record three values you'll need in Beacon: the **Directory (Tenant) ID**, the **Application (Client) ID**, and a **client secret** you create for it (Entra only shows the secret's value once — copy it immediately).
+You need three values out of this step: the **Directory (Tenant) ID**, the **Application (Client) ID**, and a **client secret** (Entra only shows the secret's value once — copy it immediately). Two ways to get them:
 
-- **Redirect URI**: `<your Worker/API origin>/v1/auth/microsoft/callback` — this is your **Worker/API origin** (see [Self-hosting Quick Start](/kb/getting-started/quick-start/) if you're not sure which of your two URLs that is), never the dashboard URL.
+**Scripted** — from a checkout of the `beacon` repository, with Node installed:
+
+```bash
+BEACON_WORKER_URL=https://beacon-api.example.com node scripts/setup-entra-sso.mjs
+```
+
+`BEACON_WORKER_URL` is your **Worker/API origin** (see [Self-hosting Quick Start](/kb/getting-started/quick-start/) if you're not sure which of your two URLs that is). The script signs you in interactively (device code — open a URL, enter a code), then creates the app registration with the redirect URI and both required permissions already set, creates a client secret, and prints all three values plus a one-click link to grant admin consent. You still need to be signed in as someone with enough Entra privilege to create an app registration (Application Administrator, Cloud Application Administrator, or Global Administrator) — no script can skip that part.
+
+**Manual** — in the Entra admin center, register a new application yourself:
+
+- **Redirect URI**: `<your Worker/API origin>/v1/auth/microsoft/callback` — your **Worker/API origin**, never the dashboard URL.
 - **API permissions** (Microsoft Graph) — add both of these and grant admin consent for both, since neither works without it:
 
 | Permission | Type | Used for |
