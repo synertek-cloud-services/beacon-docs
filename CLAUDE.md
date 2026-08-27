@@ -3,7 +3,7 @@
 ## Project overview
 
 Static knowledge base site for the Beacon open-source RMM platform.
-Live at: **https://beacon.synertekcs.com**
+Live at: **https://docs.runbeacon.net**
 Repo: `https://github.com/synertek-cloud-services/beacon-docs`
 
 ## Rules
@@ -117,7 +117,7 @@ const firstHref = catArticles[0]?.id
 
 **Cloudflare account:** `jeremys@synertekcs.com` (ID: `8fefd04d62780c1624579795cb08f891`)
 **CF Pages project name:** `beacon-docs`
-**Custom domain:** `beacon.synertekcs.com` (set in CF dashboard)
+**Custom domain:** `docs.runbeacon.net` (set in CF dashboard)
 
 **Local deploy (with direnv):**
 `.envrc` sets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` for the synertekcs.com account.
@@ -143,9 +143,4 @@ pages_build_output_dir = "dist"
 
 ## Content status
 
-3 full articles + 21 substantive stubs across all 9 categories. Stubs have real frontmatter and an intro paragraph — not lorem ipsum. Articles needing full content expansion are flagged with a `> **This article is a stub.**` callout block.
-
-Full articles:
-- `installation/agent-installation.md`
-- `using-beacon/jobs-vs-policies.md`
-- `remote-access/connecting-via-rustdesk.md`
+30 articles across all 9 categories, all with full content — no stub placeholders remain. `remote-access` (7 articles) and `using-beacon`/`administration` were most recently expanded to cover Web Remote (consent, Elevate, multi-monitor/session targeting, file transfer/clipboard), Software Management, Reports, and Network Discovery, none of which existed in the docs before 2026-08-26.

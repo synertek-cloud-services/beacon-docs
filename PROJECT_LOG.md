@@ -1,5 +1,30 @@
 # Project Log
 
+## Session 3 — 2026-08-26
+
+### What was completed
+
+**Content sync with 3 weeks of Beacon product changes** (Beacon's own CLAUDE.md/PROJECT_LOG.md showed PRs #125–#193 landed since these docs were last touched on 2026-08-06)
+- Rewrote the entire `remote-access` category: 3 of its 4 existing articles flatly denied that Web Remote/consent/graphical remote access existed, when Web Remote had grown into Beacon's flagship remote-control feature (consent, Elevate/SYSTEM access, multi-monitor, RDS/AVD session targeting, file transfer, clipboard paste)
+- New: `remote-access/web-remote.md`, `web-remote-consent.md`, `web-remote-elevate.md`, `web-remote-sessions-and-displays.md`, `web-remote-file-transfer.md` (7 articles in the category total, up from 4)
+- New: `using-beacon/software-management.md` (winget updates + uninstall), `using-beacon/reports.md` (CSV exports), `administration/network-discovery.md`
+- Updated: `administration/tenant-site-setup.md` (dedicated Company detail page + tabs), `alerting-policies/notification-channels.md` (flapping-monitor auto-mute), `integrations/autotask-psa.md` (PSA-ready alert-email header/subject contract)
+
+**CI fix**
+- `.github/workflows/deploy.yml` interpolated the raw commit message directly into `wrangler-action`'s `command:` field. A multi-line commit message had its extra lines executed as bogus follow-on wrangler commands, failing the Action job *after* the real deploy had already succeeded (misleading red X on a working deploy). Fixed by extracting just the subject line (`git log -1 --pretty=%s`) into a step output first.
+
+**Domain correction**
+- `CLAUDE.md` and this file still referenced `beacon.synertekcs.com`, but the site moved to `docs.runbeacon.net` on 2026-08-06 (`astro.config.mjs`'s `site` field, commit `abce350`) — the meta-docs were never updated to match. Fixed both.
+
+### Key decisions
+
+| Decision | Reason |
+|---|---|
+| Renamed remote-access files instead of patching in place | `connecting-via-rustdesk.md`/`rustdesk-native-client.md`/`consent-privacy-mode.md` no longer described their own content accurately, and nothing else in the repo linked to those specific slugs |
+| Kept Remote Shell and Web Remote as separate features/articles | Genuinely different capabilities in the product (text shell vs. graphical desktop) that only share the session-relay transport |
+
+---
+
 ## Session 2 — 2026-07-16
 
 ### What was completed
@@ -37,16 +62,8 @@
 
 ## Next steps
 
-### 1. Expand stub articles into full content
-21 of 24 articles are stubs. Priority order:
-- `getting-started/what-is-beacon.md` — top of the funnel
-- `getting-started/architecture-overview.md` — needed before other sections make sense
-- `administration/tenant-site-setup.md` — second most common onboarding step
-- `using-beacon/monitoring-alerting.md` — core product feature
-- `troubleshooting/best-practices.md` — high SEO value
+### 1. Patch Management article
+No article covers Beacon's Patch Management feature at all (Windows Update visibility, approval workflow, Patch Policy auto-approval/scheduled install windows, Windows/Microsoft Update takeover, drift detection, driver visibility, Server/Hyper-V exclusion). Out of scope for the Web Remote-focused Session 3 pass; a real gap since `using-beacon/reports.md` already references a "Patch Compliance" report with nothing to explain what it's compliance *with*.
 
-### 2. Add a browser shell / live terminal article
-The remote access section mentions a "browser shell" (Cloudflare Durable Objects relay) but there's no article for it. Needs: `remote-access/browser-shell.md` + sidebar entry.
-
-### 3. Polish search UI
+### 2. Polish search UI
 Pagefind is functional but the modal/overlay styling hasn't been tuned to match the dark theme exactly. The default Pagefind UI CSS overrides may conflict with `--bg`/`--surface` variables. Test at `/kb/installation/agent-installation/` and adjust `SearchBar.astro` overrides as needed.
