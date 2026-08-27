@@ -6,6 +6,8 @@ updated: 2026-08-26
 tags: [web-remote, multi-monitor, rds, avd]
 ---
 
+Two Web Remote features deal with which screen you're actually looking at: switching between a device's multiple monitors, and — on server-class Windows hosts — picking which of several active sessions to connect to at all.
+
 ## Multiple monitors
 
 If the target device reports more than one monitor, a **Displays** dropdown appears in the Web Remote toolbar. Switching monitors happens in place on your existing connection — there's no reconnect and no new session, just a resize to the newly selected screen.

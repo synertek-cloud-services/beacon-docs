@@ -3,7 +3,7 @@ interface Props {
   id: string;
 }
 const { id } = Astro.props;
-const href = `https://github.com/synertek-cloud-services/beacon-docs/edit/main/src/content/kb/${id}.md`;
+const href = `https://github.com/synertek-cloud-services/beacon-docs/edit/main/src/content/kb/${id.replace(/\.mdx?$/, '')}.md`;
 ---
 
 <a href={href} class="edit-link" target="_blank" rel="noopener noreferrer">

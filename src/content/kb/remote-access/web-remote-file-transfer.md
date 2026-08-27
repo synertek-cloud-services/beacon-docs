@@ -6,6 +6,8 @@ updated: 2026-08-26
 tags: [web-remote, file-transfer, clipboard]
 ---
 
+The Web Remote toolbar can also move data between your machine and the remote session, beyond just seeing and controlling its screen: files in either direction, and pasted text one way.
+
 ## File transfer
 
 The Web Remote toolbar can move files in both directions between your machine and the remote session:

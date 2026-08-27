@@ -6,6 +6,8 @@ updated: 2026-08-05
 tags: [faq, beta, self-hosting]
 ---
 
+Common questions about licensing, platform support, and how Beacon operates day to day.
+
 ## Is Beacon free to use?
 
 Beacon is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0). It has no per-endpoint license fee, but self-hosters operate and pay for their own Cloudflare infrastructure and supporting services.
