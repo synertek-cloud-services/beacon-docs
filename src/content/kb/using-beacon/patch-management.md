@@ -2,7 +2,7 @@
 title: Patch Management
 category: using-beacon
 order: 6
-updated: 2026-08-26
+updated: 2026-08-27
 tags: [patches, windows-update, patch-policy]
 ---
 
@@ -10,7 +10,7 @@ Patch Management covers Windows Update visibility, approval, and installation �
 
 ## The pipeline
 
-1. **Visibility** — Beacon scans each device for pending Windows Updates during its normal inventory audit. No admin rights are needed for the scan itself.
+1. **Visibility** — Beacon scans each device for pending Windows Updates during its normal inventory audit. No admin rights are needed for the scan itself. Antivirus/Defender **definition (signature) updates are deliberately excluded** — they change many times a day through Defender's own update channel, independent of the classic Windows Update catalog, so gating them behind manual approval would only make protection worse. If **Global → Patches** looks emptier than expected on an otherwise healthy fleet, this is usually why — check a device's own AV status rather than expecting a signature update to show up here.
 2. **Approval** — an update is approved or ignored once, fleet-wide, not per device. Approving "2026-08 Cumulative Update for Windows 11" approves it everywhere it's detected as pending, not just on the device you were looking at. An update with no decision yet is **pending**.
 3. **Install** — an approved update installs either manually (from a device) or automatically through a Patch Policy. An update that isn't approved never installs, even if a Patch Policy's schedule fires — Beacon revalidates approval status again immediately before dispatch.
 
