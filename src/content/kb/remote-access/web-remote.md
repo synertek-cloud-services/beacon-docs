@@ -2,7 +2,7 @@
 title: Web Remote
 category: remote-access
 order: 2
-updated: 2026-08-26
+updated: 2026-09-02
 tags: [web-remote, remote-desktop, screen-share]
 ---
 
@@ -12,7 +12,7 @@ Under the hood, Web Remote runs its own screen-capture/input-injection helper pr
 
 ## Start a session
 
-Open a device that is online and approved, then choose **Web Remote**. The session opens in a new tab. Initial connection can take up to a minute, since the agent only picks up the session request at its next check-in (sooner if [Fast Poll](/kb/getting-started/architecture-overview/) is already active).
+Open a device that is online and approved, then choose **Web Remote**. The session opens in a new tab. Initial connection can take up to a minute, since the agent only picks up the session request at its next check-in (sooner if [Fast Poll](/kb/getting-started/architecture-overview/#fast-poll) is already active). If you know ahead of time that you're about to open a session — for example, you're still on the phone with the client — click the **Fast Poll** button on the device's page first, so the device is already checking in every 15 seconds by the time you connect.
 
 Web Remote can connect to:
 
