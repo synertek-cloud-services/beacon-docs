@@ -2,7 +2,7 @@
 title: "Web Remote: Elevate"
 category: remote-access
 order: 4
-updated: 2026-08-26
+updated: 2026-11-26
 tags: [web-remote, elevate, uac, system]
 ---
 
@@ -10,13 +10,17 @@ A normal Web Remote session sees the screen the way the signed-in user sees it �
 
 ## Using Elevate
 
-Click **Elevate** on the Web Remote toolbar and confirm in the dialog that appears. The dialog shows whether elevation looks likely to succeed on this device, based on information collected the last time the endpoint reported in.
+Click **Elevate** on the Web Remote toolbar and confirm in the dialog that appears. The dialog is a plain confirmation: elevation relies on the agent's own SYSTEM identity, not on the signed-in user's privileges or any stored credential, so there is nothing to pre-check.
 
 Elevate opens as a new, independent session in the background and only swaps in once it's confirmed connected — so if elevation fails for any reason, your original session is untouched and still usable. If [consent](/kb/remote-access/web-remote-consent/) is required for this device, the end-user prompt fires again for the elevated session, the same as it did for the original one.
 
 ## What you get
 
 Elevate doesn't open any separate window or tool menu — you keep looking at the same desktop you were already on, now with SYSTEM-level access to it. The concrete difference is that you can see and click a UAC secure-desktop prompt: administer normally through the OS's own UI (right-click the Start button or taskbar for Task Manager/Device Manager/Disk Management/etc., as you would sitting at the machine), and when something you do triggers a UAC prompt, it's now visible and clickable instead of freezing the session.
+
+## Typing into an elevated window
+
+A normal session runs with the signed-in user's ordinary privileges. Windows silently ignores mouse and keyboard input from a normal process aimed at a window that was started with **Run as administrator**, with no error anywhere. If you can see a window in Web Remote but it ignores your typing and clicks, check whether it is an elevated window (an "Administrator:" title is the giveaway). Click **Elevate**, or close it and open it without elevation.
 
 ## What Elevate can't do
 

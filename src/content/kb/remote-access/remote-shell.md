@@ -2,7 +2,7 @@
 title: Use Remote Shell
 category: remote-access
 order: 1
-updated: 2026-08-26
+updated: 2026-11-26
 tags: [remote-shell, sessions, beta]
 ---
 
@@ -12,13 +12,13 @@ Remote Shell is text-only. For graphical, mouse-and-keyboard control of a Window
 
 ## Start a session
 
-Open a device that is online and approved, then choose **Remote Shell**. Keep the browser tab open while using the session. The agent receives the session command at its next check-in, so initial connection can take up to a minute.
+Open a device that is online and approved, then choose **Remote Shell**. Keep the browser tab open while using the session. A device showing the **Instant push** badge normally attaches within a few seconds; a device that is only polling picks the session up at its next check-in, up to about a minute later. See [Instant push](/kb/getting-started/architecture-overview/#instant-push).
 
 Beacon runs the shell with the agent's service identity. Treat it as a privileged administrative session and use the same change controls you apply to direct command execution.
 
 ## Beta support
 
-Linux Remote Shell is confirmed supported on real hardware. Windows Remote Shell is unvalidated. macOS is unvalidated. A connection that remains at **Connecting…** beyond a check-in interval should be investigated with the agent log and browser console/network details.
+Linux and Windows Remote Shell are confirmed on real hardware. Windows opens PowerShell 5.1 running as `NT AUTHORITY\SYSTEM`. macOS is unvalidated. A connection that remains at **Connecting…** beyond a check-in interval should be investigated with the agent log and browser console/network details.
 
 ## Session hygiene
 

@@ -2,7 +2,7 @@
 title: Scripting and Components
 category: using-beacon
 order: 3
-updated: 2026-08-05
+updated: 2026-11-26
 tags: [scripting, components, jobs]
 ---
 
@@ -18,6 +18,6 @@ ComStore is a read-only library. Clone a Component before modifying it. If a cus
 
 ## Run and review
 
-Quick Jobs are queued for the next agent check-in. Scheduled Jobs dispatch once at the selected time; they do not recur. The default execution identity is system/root. On Windows, a supported PowerShell job may explicitly run as the logged-in user, but it fails rather than silently falling back when no active console session exists.
+Quick Jobs are queued for the next agent check-in; a small Quick Job on a device with an [Instant push](/kb/getting-started/architecture-overview/#instant-push) connection wakes it immediately. Scheduled Jobs dispatch once at the selected time; they do not recur. The default execution identity is system/root. On Windows, a supported PowerShell job may explicitly run as the logged-in user, but it fails rather than silently falling back when no active console session exists.
 
 Use the Job detail page for command output and failure investigation. See [Jobs and Policies](/kb/using-beacon/jobs-vs-policies/) for targeting and timing behavior.

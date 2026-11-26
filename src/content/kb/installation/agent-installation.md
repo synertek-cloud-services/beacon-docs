@@ -2,7 +2,7 @@
 title: Installing the Beacon Agent
 category: installation
 order: 1
-updated: 2026-08-05
+updated: 2026-11-26
 tags: [installation, agent, windows, linux, beta]
 ---
 
@@ -43,7 +43,7 @@ The installer creates and starts the `beacon-agent` systemd service. It supports
 
 ## Verify enrollment
 
-If the Company requires approval, approve the pending device in the dashboard. A successful device checks in about once per minute. Confirm **Last Seen**, agent version, and **Last Audit** on the device detail page.
+If the Company requires approval, approve the pending device in the dashboard. A successful device checks in about once per minute, or every few minutes once its [instant-push](/kb/getting-started/architecture-overview/#instant-push) connection is up. Confirm **Last Seen**, agent version, and **Last Audit** on the device detail page.
 
 Useful endpoint checks:
 
