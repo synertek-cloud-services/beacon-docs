@@ -1,5 +1,22 @@
 # Project Log
 
+## Session 4 — 2026-11-26
+
+### What was completed
+
+**Content sync with the product's scalability, instant-push, and Web Remote work** (Beacon PRs #231–#261)
+- `getting-started/architecture-overview.md`: replaced the **Fast Poll** section, which described a feature the product removed, with **Instant push** (per-device `DeviceHub` WebSocket, 4-minute poll while connected, wake on session/command/small Quick Job, fallback to 60s polling, 10% jitter, `DEVICE_HUB` binding), and noted that Last Seen can be a few minutes old. R2 now described as private file storage, not just the logo.
+- New `administration/optional-features.md` (Settings → Features): the five switches, what each does on and off, defaults (off on a fresh install, on for an install that already had devices), and `FEATURES_ALL=true` for hosts.
+- `remote-access/web-remote.md`: connection time with/without instant push; Ctrl+Alt+Delete (console only, sets `SoftwareSASGeneration` on first use); new "If the screen is blank or unavailable" section (minimized/disconnected RDP client notice, DXGI fallback for virtual displays, display scaling, elevated windows); beta-support line updated to what was verified on real hardware.
+- `remote-access/web-remote-sessions-and-displays.md`: corrected which devices get the session picker (server-class; Windows 365 Cloud PCs are workstations and connect directly), the **Console (sign-in screen)** entry, straight-to-console when nobody is signed in, and RDP minimized/disconnected behavior.
+- `remote-access/web-remote-elevate.md`: dropped the dead "pre-flight" sentence from the Elevate dialog (a plain confirmation since PR #140) and added the elevated-window input note.
+- `remote-access/remote-shell.md`, `troubleshooting/best-practices.md`: Windows Remote Shell confirmed; instant-push timing; new troubleshooting entries for the blank/unavailable screen and zoomed/cropped screens.
+- `using-beacon/software-management.md`: `winget upgrade` verified on real hardware; note on the Visual C++ runtime fix (agent 0.4.10).
+- `resources/glossary.md`: Check-in updated; new **Device class**, **Instant push**, **Optional features**.
+- Small timing corrections in `scripting.md`, `agent-installation.md`, `alerting-policies/alert-rules.md` (offline threshold vs the 4-minute connected check-in).
+
+**Not documented yet (agent change not released)**: Windows Remote Shell ending when the shell exits (Beacon PR #261) and the VM-battery class fix are described only to the extent they shipped in 0.4.10.
+
 ## Session 3 — 2026-08-26
 
 ### What was completed

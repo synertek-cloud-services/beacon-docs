@@ -2,7 +2,7 @@
 title: Glossary
 category: resources
 order: 1
-updated: 2026-08-05
+updated: 2026-11-26
 tags: [glossary, reference, terminology]
 ---
 
@@ -18,7 +18,7 @@ A notification raised when a monitor's condition is met for the required sustain
 
 ## Check-in
 
-The periodic (every 60 seconds) HTTPS POST the agent makes to the Beacon Worker. Each check-in delivers device metrics and receives any pending commands.
+The periodic HTTPS POST the agent makes to the Beacon Worker, about every 60 seconds, or every 4 minutes while its [instant-push](/kb/getting-started/architecture-overview/#instant-push) connection is open. Each check-in delivers device metrics and receives any pending commands.
 
 ## Check type
 
@@ -40,6 +40,10 @@ The built-in read-only component library that ships with Beacon. ComStore compon
 
 The platform-specific directory where the agent stores its per-device credential file and agent log. Location: `%PROGRAMDATA%\Beacon\` (Windows), `/etc/beacon/` (Linux), or `/Library/Application Support/Beacon/` (macOS, unvalidated).
 
+## Device class
+
+A device's category: **server**, **workstation**, or **laptop**. The agent detects it: a Windows Server (or any OS whose name says server) is a server; a machine with a real battery is a laptop; everything else is a workstation. Virtual batteries, such as the one a Hyper-V VM inherits from a laptop host, are ignored, so a VM is never a laptop. A device's class can be overridden by hand. Class drives policy and Patch Policy targeting, and it decides whether Web Remote shows the session picker.
+
 ## Durable Object
 
 A Cloudflare infrastructure primitive used by Beacon for the SessionRelay. Each active remote session is managed by a Durable Object instance that bridges the agent WebSocket and the technician WebSocket.
@@ -52,6 +56,10 @@ The process by which a new agent registers with the Beacon Worker and receives i
 
 A Company-specific credential that authorizes a new agent to enroll. The raw value is displayed only when it is created; Beacon stores its hash. Create a dedicated deployment token and revoke it after use.
 
+## Instant push
+
+A per-device WebSocket to a Durable Object that lets the Worker tell an agent to check in right away when a session, command, or small Quick Job is queued. See [Architecture Overview](/kb/getting-started/architecture-overview/#instant-push).
+
 ## Job
 
 A one-time or scheduled execution of one or more components against a set of target devices. Jobs are either Quick (immediate) or Scheduled. See [Understanding Jobs vs. Policies](/kb/using-beacon/jobs-vs-policies/).
@@ -59,6 +67,10 @@ A one-time or scheduled execution of one or more components against a set of tar
 ## Monitor
 
 A single check rule within a Policy. Defines the check type, condition, sustained_minutes, priority, and auto-resolve behavior.
+
+## Optional features
+
+Five Beacon features that do extra work on every check-in or scheduled run (Network Discovery, Application Components, Webhooks, Windows and Microsoft Update management, and agent-measured monitors). They are off on a fresh install and turned on under **Settings → Features**. See [Optional Features](/kb/administration/optional-features/).
 
 ## Policy
 

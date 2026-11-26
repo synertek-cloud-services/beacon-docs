@@ -2,7 +2,7 @@
 title: Alert Rules
 category: alerting-policies
 order: 1
-updated: 2026-08-05
+updated: 2026-11-26
 tags: [alerting, policies, monitors, rules, thresholds]
 ---
 
@@ -61,7 +61,7 @@ Any of the listed states triggers the monitor. States: `not_detected`, `not_runn
 { "threshold_minutes": 30 }
 ```
 
-Fires when no check-in is received for `threshold_minutes`. Does not use `sustained_minutes` (the offline threshold itself is the debounce).
+Fires when no check-in is received for `threshold_minutes`. A device with an instant-push connection checks in about every 4 minutes, so keep the threshold well above that (the seeded default is 30 minutes). Does not use `sustained_minutes` (the offline threshold itself is the debounce).
 
 ### `process`
 

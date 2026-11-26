@@ -2,30 +2,34 @@
 title: Architecture Overview
 category: getting-started
 order: 2
-updated: 2026-09-02
+updated: 2026-11-26
 tags: [architecture, cloudflare, agent]
 ---
 
-Beacon has three deployable parts: a Go endpoint agent, a Cloudflare Worker control plane, and a Vue dashboard. The Worker uses D1 for persistent data, Durable Objects for the remote-session relay, and R2 for private branding-logo storage.
+Beacon has three deployable parts: a Go endpoint agent, a Cloudflare Worker control plane, and a Vue dashboard. The Worker uses D1 for persistent data, Durable Objects for the remote-session relay, and R2 for private file storage (the branding logo, application installers, and Web Remote file transfers).
 
 ## Endpoint-to-control-plane flow
 
-The agent enrolls with a company token and receives a per-device credential. It then checks in over HTTPS every 60 seconds. A check-in reports metrics and prior command results; the Worker returns any queued commands and monitoring assignments. This pull model means endpoints do not listen for inbound management connections.
+The agent enrolls with a company token and receives a per-device credential. It then checks in over HTTPS about once a minute (see [Instant push](#instant-push) for the connected case). A check-in reports metrics and prior command results; the Worker returns any queued commands and monitoring assignments. This pull model means endpoints do not listen for inbound management connections.
 
 ```text
 Dashboard → Worker API → D1 command queue
                          ↓
-Endpoint agent ← HTTPS check-in (every 60 seconds)
+Endpoint agent ← HTTPS check-in (about once a minute)
 Endpoint agent → results and telemetry → Worker API
 ```
 
 Remote Shell uses the same outbound model. A technician and the agent each connect to a session-specific Durable Object relay; the endpoint still has no inbound listener.
 
-## Fast Poll
+## Instant push
 
-The 60-second check-in interval above is the default, not a fixed floor. Opening a Remote Shell or Web Remote session, queuing a direct device command, or clicking the **Fast Poll** button on a device's page all temporarily drop a device's check-in interval to 15 seconds, for 15 minutes.
+The check-in interval is about 60 seconds. Each agent adds up to 10% random jitter, so devices that start together drift apart instead of all arriving at the same moment.
 
-Fast Poll doesn't speed up the very first action against an already-cold device — that first check-in still happens on its normal schedule, up to 60 seconds out. It helps with everything *after* that: if you already know you're about to need a device (for example, you're still on the phone with a client before opening Web Remote), clicking **Fast Poll** ahead of time means the session itself connects in seconds instead of up to a minute.
+Each agent also keeps one idle WebSocket open to a per-device Durable Object (`DeviceHub`). While that connection is up, the agent checks in every 4 minutes instead of every minute, and the Worker pushes a short "wake" message the moment something is queued for the device: a Web Remote or Remote Shell session, a direct device command, or a small Quick Job. The agent then checks in immediately. Sessions and commands therefore reach a connected device in seconds, and an idle fleet makes far fewer requests to the Worker, which is what lets a small fleet fit inside Cloudflare's free Workers plan.
+
+The connection carries no data. Commands, results, and session requests still travel in the normal check-in; the wake message only says "check in now". If the connection drops, the agent falls back to polling every 60 seconds and reconnects with growing delays. A device's page shows an **Instant push** badge while the connection is up and **Polling** when it is not. Instant push needs the `DEVICE_HUB` Durable Object binding in the Worker (see the [self-hosting guide](https://github.com/synertek-cloud-services/beacon/blob/main/docs/SELF_HOSTING.md)); without it everything still works, just by polling.
+
+Because a connected device checks in every 4 minutes, **Last Seen** on a healthy device can be a few minutes old. Use [offline-monitor](/kb/alerting-policies/alert-rules/) thresholds well above that; the seeded default is 30 minutes.
 
 ## Responsibilities
 

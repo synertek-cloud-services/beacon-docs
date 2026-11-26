@@ -2,7 +2,7 @@
 title: Software Management (winget)
 category: using-beacon
 order: 4
-updated: 2026-08-26
+updated: 2026-11-26
 tags: [software, winget, updates]
 ---
 
@@ -14,7 +14,7 @@ From a device's kebab menu on Device Detail, choose **Update Software (winget)**
 
 This is a simple opt-in sweep, not a policy: there's no scheduling, targeting, or allowlist yet. You trigger it per device, when you want it.
 
-Because winget's own machine-readable output isn't reliable enough to parse consistently across versions, Beacon doesn't attempt structured per-package success/failure reporting — read the Command History output directly. The endpoint needs `winget` already present to do anything.
+Because winget's own machine-readable output isn't reliable enough to parse consistently across versions, Beacon doesn't attempt structured per-package success/failure reporting — read the Command History output directly. The endpoint needs `winget` (the Microsoft App Installer package) already present to do anything. Beacon runs it as SYSTEM. On a fresh Windows install with no system-wide Visual C++ runtime, winget needs its own runtime package folder on the search path, which agent 0.4.10 and later arrange; older agents fail with exit code `0xc0000135` on such a machine.
 
 ## Uninstalling software
 
@@ -22,4 +22,4 @@ The Software section on Device Detail can show an **Uninstall** action next to a
 
 ## Beta support
 
-The dashboard-to-agent dispatch pipeline for winget updates is confirmed; actual `winget upgrade` execution has not yet been verified against real Windows hardware. Software Uninstall is confirmed for MSI-based and quiet-uninstall-capable applications.
+`winget upgrade` is confirmed on real Windows hardware: a Windows 11 machine upgraded 7-Zip from 22.01 to 26.06 through Beacon (agent 0.4.10), and a Windows 365 Cloud PC upgraded real packages earlier. Software Uninstall is confirmed for MSI-based and quiet-uninstall-capable applications.
